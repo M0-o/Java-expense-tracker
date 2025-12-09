@@ -1,4 +1,4 @@
-package com.yourcompany.expensetracker;
+package com.emsi.expensetracker;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

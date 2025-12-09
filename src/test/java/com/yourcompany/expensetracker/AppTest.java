@@ -1,4 +1,4 @@
-package com.yourcompany.expensetracker;
+package com.emsi.expensetracker;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
