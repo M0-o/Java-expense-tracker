@@ -1,0 +1,61 @@
+target/
+pom.xml.tag
+pom.xml.next
+pom.xml.bak
+pom.xml.versions
+pom.xml.snapshots
+/*.ipr
+# Maven end
+
+# Gradle
+.gradle/
+/build/
+# Gradle end
+
+# Java
+*.class
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+dependency-reduced-pom.xml
+
+# Java annotation processor (APT)
+.factorypath
+
+# Virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+
+# Java end
+
+# Eclipse
+.classpath
+.project
+.settings/
+.metadata/
+*.launch # Eclipse launch configurations
+*.testsuite
+*.generic
+# Eclipse end
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+out/
+# IntelliJ IDEA end
+
+# VS Code
+.vscode/
+# VS Code end
+
+# Operating System Files
+.DS_Store
+Thumbs.db
+# Operating System Files end
