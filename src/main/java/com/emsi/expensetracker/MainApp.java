@@ -22,6 +22,16 @@ public class MainApp extends Application {
         primaryStage.show();
     }
 
+    // replace after finishing fxml files for login and register
+//    @Override
+//    public void start(Stage primaryStage) throws Exception {
+//        Parent root = FXMLLoader.load(getClass().getResource("/fxml/LoginView.fxml"));
+//        primaryStage.setTitle("Expense Tracker - Login");
+//        primaryStage.setScene(new Scene(root, 400, 300));
+//        primaryStage.show();
+//    }
+
+
     @Override
     public void stop() {
         DatabaseConnection.shutdown();
