@@ -1,4 +1,5 @@
-package com.emsi.expensetracker;
+package com.emsi.expensetracker.util;
+
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
@@ -25,7 +26,7 @@ public class DatabaseConnection {
         HikariConfig config = new HikariConfig();
         config.setJdbcUrl(props.getProperty("db.url", "jdbc:sqlite:expense_tracker.db"));
         config.setMaximumPoolSize(Integer.parseInt(props.getProperty("db.pool.size", "5")));
-        
+
         // SQLite specific settings
         config.addDataSourceProperty("journal_mode", "WAL");
         config.addDataSourceProperty("synchronous", "NORMAL");
@@ -68,31 +69,45 @@ public class DatabaseConnection {
     }
 
     private static void createTables() {
+        String createUsers = """
+        CREATE TABLE IF NOT EXISTS users (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            username TEXT UNIQUE NOT NULL,
+            password TEXT NOT NULL,
+            email TEXT,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+        """;
+
         String createExpenses = """
-            CREATE TABLE IF NOT EXISTS expenses (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                description TEXT NOT NULL,
-                amount REAL NOT NULL,
-                category TEXT,
-                date TEXT DEFAULT CURRENT_DATE
-            )
-            """;
+        CREATE TABLE IF NOT EXISTS expenses (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            user_id INTEGER NOT NULL,
+            description TEXT NOT NULL,
+            amount REAL NOT NULL,
+            category TEXT,
+            date TEXT DEFAULT CURRENT_DATE,
+            FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+        )
+        """;
 
         String createCategories = """
-            CREATE TABLE IF NOT EXISTS categories (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                name TEXT NOT NULL UNIQUE
-            )
-            """;
+        CREATE TABLE IF NOT EXISTS categories (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT NOT NULL UNIQUE
+        )
+        """;
 
         try (Connection conn = getConnection();
              Statement stmt = conn.createStatement()) {
+            stmt.execute(createUsers);
             stmt.execute(createExpenses);
             stmt.execute(createCategories);
         } catch (SQLException e) {
             System.err.println("Error creating tables: " + e.getMessage());
         }
     }
+
 
     private static void seedIfEmpty() {
         try (Connection conn = getConnection();
