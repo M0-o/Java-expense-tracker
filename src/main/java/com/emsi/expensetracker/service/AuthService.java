@@ -1,6 +1,6 @@
 package com.emsi.expensetracker.service;
 
-import com.emsi.expensetracker.DatabaseConnection;
+import com.emsi.expensetracker.util.DatabaseConnection;
 import com.emsi.expensetracker.model.User;
 import java.security.MessageDigest;
 import java.sql.*;

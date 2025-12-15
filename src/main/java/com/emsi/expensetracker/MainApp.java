@@ -1,6 +1,7 @@
 
 package com.emsi.expensetracker;
 
+import com.emsi.expensetracker.util.DatabaseConnection;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,7 +17,7 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/MainView.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/LoginView.fxml"));
         primaryStage.setTitle("Expense Tracker");
         primaryStage.setScene(new Scene(root, 800, 600));
         primaryStage.show();

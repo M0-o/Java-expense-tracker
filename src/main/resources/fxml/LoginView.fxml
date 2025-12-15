@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TextField fx:id="usernameField" layoutX="196.0" layoutY="142.0" prefHeight="25.0" prefWidth="235.0" />
+      <PasswordField fx:id="passwordField" layoutX="196.0" layoutY="188.0" prefHeight="25.0" prefWidth="235.0" />
+      <Button layoutX="254.0" layoutY="241.0" mnemonicParsing="false" text="Register" />
+      <Button layoutX="324.0" layoutY="241.0" mnemonicParsing="false" text="Login" />
+      <Text layoutX="107.0" layoutY="159.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Text>
+      <Text layoutX="106.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" wrappingWidth="59.33333333333337">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Text>
+      <Text layoutX="238.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LOGIN PAGE" wrappingWidth="124.4818115234375">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>
