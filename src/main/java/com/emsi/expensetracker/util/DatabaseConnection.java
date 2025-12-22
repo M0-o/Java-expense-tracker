@@ -24,7 +24,7 @@ public class DatabaseConnection {
         Properties props = loadConfig();
 
         HikariConfig config = new HikariConfig();
-        config.setJdbcUrl(props.getProperty("db.url", "jdbc:sqlite:expense_tracker.db"));
+        config.setJdbcUrl(props.getProperty("db.url", "jdbc:sqlite:db/expense_tracker.db"));
         config.setMaximumPoolSize(Integer.parseInt(props.getProperty("db.pool.size", "5")));
 
         // SQLite specific settings
@@ -112,8 +112,8 @@ public class DatabaseConnection {
     private static void seedIfEmpty() {
         try (Connection conn = getConnection();
              Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("SELECT COUNT(*) FROM expenses")) {
-            
+             ResultSet rs = stmt.executeQuery("SELECT COUNT(*) FROM categories")) {
+
             if (rs.getInt(1) == 0) {
                 seedSampleData();
             }
@@ -129,18 +129,10 @@ public class DatabaseConnection {
             ('Shopping'), ('Bills'), ('Other')
             """;
 
-        String seedExpenses = """
-            INSERT INTO expenses (description, amount, category, date) VALUES
-            ('Groceries', 45.50, 'Food', '2025-12-01'),
-            ('Bus ticket', 2.50, 'Transport', '2025-12-02'),
-            ('Cinema', 12.00, 'Entertainment', '2025-12-03')
-            """;
-
         try (Connection conn = getConnection();
              Statement stmt = conn.createStatement()) {
             stmt.execute(seedCategories);
-            stmt.execute(seedExpenses);
-            System.out.println("Sample data loaded");
+            System.out.println("Categories loaded");
         } catch (SQLException e) {
             System.err.println("Seed error: " + e.getMessage());
         }

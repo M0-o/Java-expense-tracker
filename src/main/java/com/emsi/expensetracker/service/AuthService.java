@@ -9,12 +9,11 @@ public class AuthService {
     private static User currentUser;
 
     public static boolean register(String username, String password, String email) {
-        try {
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(
+                     "INSERT INTO users (username, password, email) VALUES (?, ?, ?)"
+             )) {
             String hashedPassword = hashPassword(password);
-            Connection conn = DatabaseConnection.getConnection();
-            PreparedStatement stmt = conn.prepareStatement(
-                    "INSERT INTO users (username, password, email) VALUES (?, ?, ?)"
-            );
             stmt.setString(1, username);
             stmt.setString(2, hashedPassword);
             stmt.setString(3, email);
@@ -27,23 +26,23 @@ public class AuthService {
     }
 
     public static boolean login(String username, String password) {
-        try {
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(
+                     "SELECT id, username, email FROM users WHERE username = ? AND password = ?"
+             )) {
             String hashedPassword = hashPassword(password);
-            Connection conn = DatabaseConnection.getConnection();
-            PreparedStatement stmt = conn.prepareStatement(
-                    "SELECT id, username, email FROM users WHERE username = ? AND password = ?"
-            );
             stmt.setString(1, username);
             stmt.setString(2, hashedPassword);
-            ResultSet rs = stmt.executeQuery();
 
-            if (rs.next()) {
-                currentUser = new User(
-                        rs.getInt("id"),
-                        rs.getString("username"),
-                        rs.getString("email")
-                );
-                return true;
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    currentUser = new User(
+                            rs.getInt("id"),
+                            rs.getString("username"),
+                            rs.getString("email")
+                    );
+                    return true;
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
