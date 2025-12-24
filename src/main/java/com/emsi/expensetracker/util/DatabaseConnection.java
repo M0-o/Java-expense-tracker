@@ -1,9 +1,6 @@
 package com.emsi.expensetracker.util;
 
 
-import com.zaxxer.hikari.HikariConfig;
-import com.zaxxer.hikari.HikariDataSource;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
@@ -11,6 +8,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
+
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
 
 public class DatabaseConnection {
     private static HikariDataSource dataSource;
@@ -82,19 +82,20 @@ public class DatabaseConnection {
         String createExpenses = """
         CREATE TABLE IF NOT EXISTS expenses (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            user_id INTEGER NOT NULL,
             description TEXT NOT NULL,
             amount REAL NOT NULL,
-            category TEXT,
             date TEXT DEFAULT CURRENT_DATE,
-            FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+            user_id INT REFERENCES users(id) ON DELETE CASCADE,
+            category_id INT REFERENCES categories(id) ON DELETE SET NULL,
         )
         """;
 
         String createCategories = """
         CREATE TABLE IF NOT EXISTS categories (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            name TEXT NOT NULL UNIQUE
+            name TEXT NOT NULL UNIQUE,
+            user_id INT REFERENCES users(id) ON DELETE CASCADE,
+            description TEXT 
         )
         """;
 
