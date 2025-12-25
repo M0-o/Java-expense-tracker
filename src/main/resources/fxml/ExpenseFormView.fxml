@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Text?>
 
-
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <TextField layoutX="222.0" layoutY="56.0" />
-      <TextField layoutX="222.0" layoutY="118.0" />
-      <TextArea layoutX="226.0" layoutY="163.0" prefHeight="200.0" prefWidth="200.0" />
+      <TextField fx:id="nameField" layoutX="222.0" layoutY="56.0" />
+      <TextField fx:id="amountField" layoutX="222.0" layoutY="118.0" />
+      <TextArea fx:id="descriptionField" layoutX="226.0" layoutY="163.0" prefHeight="200.0" prefWidth="200.0" />
       <Text layoutX="108.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Expense :" />
       <Text layoutX="109.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Amount :" />
       <Text layoutX="132.0" layoutY="177.0" strokeType="OUTSIDE" strokeWidth="0.0" />
       <Text layoutX="109.0" layoutY="186.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description :" />
+      <Button fx:id="confirmationButton" layoutX="477.0" layoutY="340.0" mnemonicParsing="false" onMouseClicked="#handleSaveExpense" text="Add" />
+      <Label fx:id="errorLabel" layoutX="92.0" layoutY="303.0" />
    </children>
 </Pane>
