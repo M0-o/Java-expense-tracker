@@ -13,6 +13,12 @@ public class Category {
         this.userId = userId;
     }
 
+    public Category(String name, String description, int userId) {
+        this.name = name;
+        this.description = description;
+        this.userId = userId;
+    }
+    public Category() {}
     public int getId() { return id; }
     public String getName() { return name; }
     public String getDescription() { return description; }

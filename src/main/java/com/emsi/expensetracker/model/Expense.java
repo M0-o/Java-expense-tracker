@@ -15,7 +15,15 @@ public class Expense {
         this.categoryId = categoryId;
         this.date = date;
     }
-
+    
+    public Expense( String description, double amount, int categoryId, String date, int userId){
+        this.description = description;
+        this.amount = amount;
+        this.categoryId = categoryId;
+        this.date = date;
+        this.userId = userId;
+    }
+    
     public int getId() { return id; }
     public String getDescription() { return description; }
     public double getAmount() { return amount; }
