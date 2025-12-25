@@ -12,13 +12,9 @@ import com.emsi.expensetracker.service.base.BaseService;
  * user-specific categories and default system categories. Enforces business
  * rules such as uniqueness validation and ownership verification.
  */
-public class CategoryService extends BaseService {
+public class CategoryService extends BaseService<CategoryDAO> {
 
-    /**
-     * The CategoryDAO instance for database operations.
-     */
-    private final CategoryDAO categoryDAO;
-
+    
     /**
      * Constructs a new CategoryService with the specified CategoryDAO.
      *
@@ -27,7 +23,6 @@ public class CategoryService extends BaseService {
      */
     public CategoryService(CategoryDAO dao) {
         super(dao);
-        this.categoryDAO = dao;
     }
 
     /**
@@ -45,12 +40,12 @@ public class CategoryService extends BaseService {
         }
 
         // Check if category already exists for this user
-        if (categoryDAO.findByNameAndUserId(name, userId) != null) {
+        if (dao.findByNameAndUserId(name, userId) != null) {
             return false; // Category with this name already exists for user
         }
 
         Category category = new Category(name.trim(), description, userId);
-        return categoryDAO.save(category);
+        return dao.save(category);
     }
 
     /**
@@ -60,7 +55,7 @@ public class CategoryService extends BaseService {
      * @return Category object or null
      */
     public Category getCategoryById(int categoryId) {
-        return categoryDAO.findById(categoryId);
+        return dao.findById(categoryId);
     }
 
     /**
@@ -70,7 +65,7 @@ public class CategoryService extends BaseService {
      * @return List of user's categories
      */
     public List<Category> getUserCategories(int userId) {
-        return categoryDAO.findByUserId(userId);
+        return dao.findByUserId(userId);
     }
 
     /**
@@ -79,7 +74,7 @@ public class CategoryService extends BaseService {
      * @return List of all categories
      */
     public List<Category> getAllCategories() {
-        return categoryDAO.findAll();
+        return dao.findAll();
     }
 
     /**
@@ -88,7 +83,7 @@ public class CategoryService extends BaseService {
      * @return List of default categories
      */
     public List<Category> getDefaultCategories() {
-        return categoryDAO.findDefaultCategories();
+        return dao.findDefaultCategories();
     }
 
     /**
@@ -99,8 +94,8 @@ public class CategoryService extends BaseService {
      * @return Combined list of user and default categories
      */
     public List<Category> getAvailableCategories(int userId) {
-        List<Category> categories = categoryDAO.findByUserId(userId);
-        categories.addAll(categoryDAO.findDefaultCategories());
+        List<Category> categories = dao.findByUserId(userId);
+        categories.addAll(dao.findDefaultCategories());
         return categories;
     }
 
@@ -120,7 +115,7 @@ public class CategoryService extends BaseService {
         }
 
         // Get existing category
-        Category existingCategory = categoryDAO.findById(categoryId);
+        Category existingCategory = dao.findById(categoryId);
         if (existingCategory == null) {
             return false;
         }
@@ -134,7 +129,7 @@ public class CategoryService extends BaseService {
         existingCategory.setName(name.trim());
         existingCategory.setDescription(description);
 
-        return categoryDAO.update(existingCategory);
+        return dao.update(existingCategory);
     }
 
     /**
@@ -146,7 +141,7 @@ public class CategoryService extends BaseService {
      */
     public boolean deleteCategory(int categoryId, int userId) {
         // Get existing category
-        Category existingCategory = categoryDAO.findById(categoryId);
+        Category existingCategory = dao.findById(categoryId);
         if (existingCategory == null) {
             return false;
         }
@@ -156,7 +151,7 @@ public class CategoryService extends BaseService {
             return false; // User doesn't own this category
         }
 
-        return categoryDAO.delete(categoryId);
+        return dao.delete(categoryId);
     }
 
     /**
@@ -167,7 +162,7 @@ public class CategoryService extends BaseService {
      * @return true if exists, false otherwise
      */
     public boolean categoryExists(String name, int userId) {
-        return categoryDAO.findByNameAndUserId(name, userId) != null;
+        return dao.findByNameAndUserId(name, userId) != null;
     }
 
     /**
@@ -178,6 +173,6 @@ public class CategoryService extends BaseService {
      * @return Category if found, null otherwise
      */
     public Category getCategoryByName(String name, int userId) {
-        return categoryDAO.findByNameAndUserId(name, userId);
+        return dao.findByNameAndUserId(name, userId);
     }
 }

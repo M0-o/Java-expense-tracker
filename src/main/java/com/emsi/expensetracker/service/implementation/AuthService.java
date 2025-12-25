@@ -10,7 +10,7 @@ import com.emsi.expensetracker.service.base.BaseService;
  * registration, login, logout, and session management. Maintains the current
  * authenticated user's session.
  */
-public class AuthService extends BaseService {
+public class AuthService extends BaseService<AuthDAO> {
 
     /**
      * The currently authenticated user, null if no user is logged in.
