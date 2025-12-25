@@ -8,20 +8,20 @@ import com.emsi.expensetracker.dao.base.BaseDAOClass;
  * Access Object (DAO) for database operations. Services implement business
  * logic and act as an intermediary between controllers and data access layers.
  */
-public abstract class BaseService {
+public abstract class BaseService<D extends BaseDAOClass> {
 
     /**
      * The Data Access Object used for database operations. Protected to allow
      * subclasses to access it directly.
      */
-    protected BaseDAOClass dao;
+    protected D dao;
 
     /**
      * Constructs a new BaseService with the specified DAO.
      *
      * @param dao The Data Access Object to use for database operations
      */
-    public BaseService(BaseDAOClass dao) {
+    public BaseService(D dao) {
         this.dao = dao;
     }
 
