@@ -45,7 +45,7 @@ public class ExpenseDAO extends BaseDAOClass<Expense, Integer> {
                         rs.getString("description"),
                         rs.getDouble("amount"),
                         rs.getInt("category_id"),
-                        rs.getString("date"),
+                        rs.getDate("date").toLocalDate(),
                         rs.getInt("user_id")
                 );
             }
@@ -71,7 +71,7 @@ public class ExpenseDAO extends BaseDAOClass<Expense, Integer> {
                         rs.getString("description"),
                         rs.getDouble("amount"),
                         rs.getInt("category_id"),
-                        rs.getString("date"),
+                        rs.getDate("date").toLocalDate(),
                         rs.getInt("user_id")
                 );
                 expenses.add(expense);
@@ -95,7 +95,7 @@ public class ExpenseDAO extends BaseDAOClass<Expense, Integer> {
         )) {
             stmt.setString(1, expense.getDescription());
             stmt.setDouble(2, expense.getAmount());
-            stmt.setString(3, expense.getDate());
+            stmt.setDate(3, java.sql.Date.valueOf(expense.getDate()));
             stmt.setInt(4, expense.getCategoryId());
             stmt.setInt(5, expense.getUserId());
             stmt.executeUpdate();
@@ -120,7 +120,7 @@ public class ExpenseDAO extends BaseDAOClass<Expense, Integer> {
         )) {
             stmt.setString(1, expense.getDescription());
             stmt.setDouble(2, expense.getAmount());
-            stmt.setString(3, expense.getDate());
+            stmt.setDate(3, java.sql.Date.valueOf(expense.getDate()));
             stmt.setInt(4, expense.getCategoryId());
             stmt.setInt(5, expense.getId());
 
@@ -170,7 +170,7 @@ public class ExpenseDAO extends BaseDAOClass<Expense, Integer> {
                             rs.getString("description"),
                             rs.getDouble("amount"),
                             rs.getInt("category_id"),
-                            rs.getString("date"),
+                            rs.getDate("date").toLocalDate(),
                             rs.getInt("user_id")
                     );
                     expenses.add(expense);
