@@ -6,10 +6,25 @@ import com.emsi.expensetracker.dao.implementation.CategoryDAO;
 import com.emsi.expensetracker.model.Category;
 import com.emsi.expensetracker.service.base.BaseService;
 
+/**
+ * Service class for category management operations. Provides business logic for
+ * creating, retrieving, updating, and deleting expense categories. Handles both
+ * user-specific categories and default system categories. Enforces business
+ * rules such as uniqueness validation and ownership verification.
+ */
 public class CategoryService extends BaseService {
 
+    /**
+     * The CategoryDAO instance for database operations.
+     */
     private final CategoryDAO categoryDAO;
 
+    /**
+     * Constructs a new CategoryService with the specified CategoryDAO.
+     *
+     * @param dao The CategoryDAO to use for category-related database
+     * operations
+     */
     public CategoryService(CategoryDAO dao) {
         super(dao);
         this.categoryDAO = dao;
@@ -17,6 +32,7 @@ public class CategoryService extends BaseService {
 
     /**
      * Create a new category for a user
+     *
      * @param name Category name
      * @param description Category description
      * @param userId User's ID
@@ -39,6 +55,7 @@ public class CategoryService extends BaseService {
 
     /**
      * Get a category by ID
+     *
      * @param categoryId Category ID
      * @return Category object or null
      */
@@ -48,6 +65,7 @@ public class CategoryService extends BaseService {
 
     /**
      * Get all categories for a specific user
+     *
      * @param userId User's ID
      * @return List of user's categories
      */
@@ -57,6 +75,7 @@ public class CategoryService extends BaseService {
 
     /**
      * Get all categories (including default system categories)
+     *
      * @return List of all categories
      */
     public List<Category> getAllCategories() {
@@ -65,6 +84,7 @@ public class CategoryService extends BaseService {
 
     /**
      * Get default/system categories
+     *
      * @return List of default categories
      */
     public List<Category> getDefaultCategories() {
@@ -72,7 +92,9 @@ public class CategoryService extends BaseService {
     }
 
     /**
-     * Get categories available to a user (user's categories + default categories)
+     * Get categories available to a user (user's categories + default
+     * categories)
+     *
      * @param userId User's ID
      * @return Combined list of user and default categories
      */
@@ -84,6 +106,7 @@ public class CategoryService extends BaseService {
 
     /**
      * Update an existing category
+     *
      * @param categoryId Category ID
      * @param name New name
      * @param description New description
@@ -116,6 +139,7 @@ public class CategoryService extends BaseService {
 
     /**
      * Delete a category
+     *
      * @param categoryId Category ID
      * @param userId User ID (for verification)
      * @return true if deleted successfully, false otherwise
@@ -137,6 +161,7 @@ public class CategoryService extends BaseService {
 
     /**
      * Check if a category name already exists for a user
+     *
      * @param name Category name
      * @param userId User's ID
      * @return true if exists, false otherwise
@@ -147,6 +172,7 @@ public class CategoryService extends BaseService {
 
     /**
      * Get category by name for a specific user
+     *
      * @param name Category name
      * @param userId User's ID
      * @return Category if found, null otherwise
@@ -155,4 +181,3 @@ public class CategoryService extends BaseService {
         return categoryDAO.findByNameAndUserId(name, userId);
     }
 }
-
