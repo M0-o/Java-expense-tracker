@@ -1,6 +1,5 @@
 package com.emsi.expensetracker.util;
 
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
@@ -13,25 +12,28 @@ import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
 public class DatabaseConnection {
-    private static HikariDataSource dataSource;
+
+    private final HikariDataSource dataSource;
 
     // Private constructor - prevent instantiation
-    private DatabaseConnection() {}
-    // Initialize the connection pool
-    public static void initialize() {
-        if (dataSource != null) return;
+    public DatabaseConnection() {
 
         Properties props = loadConfig();
 
         HikariConfig config = new HikariConfig();
-        config.setJdbcUrl(props.getProperty("db.url", "jdbc:sqlite:db/expense_tracker.db"));
-        config.setMaximumPoolSize(Integer.parseInt(props.getProperty("db.pool.size", "5")));
+        config.setJdbcUrl(props.getProperty("db.url"));
+        config.setMaximumPoolSize(Integer.parseInt(props.getProperty("db.pool.size")));
 
         // SQLite specific settings
         config.addDataSourceProperty("journal_mode", "WAL");
         config.addDataSourceProperty("synchronous", "NORMAL");
 
-        dataSource = new HikariDataSource(config);
+        this.dataSource = new HikariDataSource(config);
+
+    }
+
+    // Initialize the connection pool
+    public void initialize() {
 
         createTables();
         seedIfEmpty();
@@ -53,22 +55,19 @@ public class DatabaseConnection {
     }
 
     // Get a connection from the pool
-    public static Connection getConnection() throws SQLException {
-        if (dataSource == null) {
-            initialize();
-        }
+    public Connection getConnection() throws SQLException {
         return dataSource.getConnection();
     }
 
     // Shutdown the pool when app closes
-    public static void shutdown() {
+    public void shutdown() {
         if (dataSource != null) {
             dataSource.close();
             System.out.println("Database connection pool closed");
         }
     }
 
-    private static void createTables() {
+    private void createTables() {
         String createUsers = """
         CREATE TABLE IF NOT EXISTS users (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -86,7 +85,7 @@ public class DatabaseConnection {
             amount REAL NOT NULL,
             date TEXT DEFAULT CURRENT_DATE,
             user_id INT REFERENCES users(id) ON DELETE CASCADE,
-            category_id INT REFERENCES categories(id) ON DELETE SET NULL,
+            category_id INT REFERENCES categories(id) ON DELETE SET NULL
         )
         """;
 
@@ -99,8 +98,7 @@ public class DatabaseConnection {
         )
         """;
 
-        try (Connection conn = getConnection();
-             Statement stmt = conn.createStatement()) {
+        try (Connection conn = getConnection(); Statement stmt = conn.createStatement()) {
             stmt.execute(createUsers);
             stmt.execute(createExpenses);
             stmt.execute(createCategories);
@@ -109,11 +107,8 @@ public class DatabaseConnection {
         }
     }
 
-
-    private static void seedIfEmpty() {
-        try (Connection conn = getConnection();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("SELECT COUNT(*) FROM categories")) {
+    private void seedIfEmpty() {
+        try (Connection conn = getConnection(); Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery("SELECT COUNT(*) FROM categories")) {
 
             if (rs.getInt(1) == 0) {
                 seedSampleData();
@@ -123,15 +118,14 @@ public class DatabaseConnection {
         }
     }
 
-    private static void seedSampleData() {
+    private void seedSampleData() {
         String seedCategories = """
             INSERT INTO categories (name) VALUES
             ('Food'), ('Transport'), ('Entertainment'),
             ('Shopping'), ('Bills'), ('Other')
             """;
 
-        try (Connection conn = getConnection();
-             Statement stmt = conn.createStatement()) {
+        try (Connection conn = getConnection(); Statement stmt = conn.createStatement()) {
             stmt.execute(seedCategories);
             System.out.println("Categories loaded");
         } catch (SQLException e) {
