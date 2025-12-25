@@ -1,17 +1,27 @@
 package com.emsi.expensetracker.controller;
 
-import com.emsi.expensetracker.service.AuthService;
+import com.emsi.expensetracker.service.implementation.AuthService;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import com.emsi.expensetracker.MainApp;
 
 public class LoginController {
-    @FXML private TextField usernameField;
-    @FXML private PasswordField passwordField;
-    @FXML private Label errorLabel;
+
+    private final AuthService authService;
+    private final MainApp app;
+    @FXML
+    private TextField usernameField;
+    @FXML
+    private PasswordField passwordField;
+    @FXML
+    private Label errorLabel;
+
+    public LoginController(MainApp app, AuthService authService) {
+        this.authService = authService;
+        this.app = app;
+    }
 
     @FXML
     private void handleLogin() {
@@ -23,7 +33,7 @@ public class LoginController {
             return;
         }
 
-        if (AuthService.login(username, password)) {
+        if (authService.login(username, password)) {
             loadMainView();
         } else {
             showError("Invalid username or password");
@@ -32,23 +42,19 @@ public class LoginController {
 
     @FXML
     private void handleRegister() {
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource("/fxml/RegisterView.fxml"));
-            Stage stage = (Stage) usernameField.getScene().getWindow();
-            stage.setScene(new Scene(root));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
+        RegisterController controller = new RegisterController(app ,authService);
+        Scene scene = app.loadScene("/fxml/RegisterView.fxml", controller);
+        Stage stage = (Stage) usernameField.getScene().getWindow();
+        stage.setScene(scene);
+
     }
 
     private void loadMainView() {
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource("/fxml/MainView.fxml"));
-            Stage stage = (Stage) usernameField.getScene().getWindow();
-            stage.setScene(new Scene(root, 800, 600));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        MainController controller = new MainController(app , authService);
+        Scene scene = app.loadScene("/fxml/MainView.fxml", controller);
+        Stage stage = (Stage) usernameField.getScene().getWindow();
+        stage.setScene(scene);
     }
 
     private void showError(String message) {

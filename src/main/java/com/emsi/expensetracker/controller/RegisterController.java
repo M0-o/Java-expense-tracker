@@ -1,19 +1,26 @@
 package com.emsi.expensetracker.controller;
 
-import com.emsi.expensetracker.service.AuthService;
+import com.emsi.expensetracker.service.implementation.AuthService;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import com.emsi.expensetracker.MainApp;
 
 public class RegisterController {
+    AuthService authService ;
+    MainApp app ;
+
     @FXML private TextField usernameField;
     @FXML private TextField emailField;
     @FXML private PasswordField passwordField;
     @FXML private PasswordField confirmPasswordField;
     @FXML private Label errorLabel;
+
+    public RegisterController(MainApp app ,AuthService authService) {
+        this.authService = authService;
+        this.app = app ;
+    }
 
     @FXML
     private void handleRegister() {
@@ -37,7 +44,7 @@ public class RegisterController {
             return;
         }
 
-        if (AuthService.register(username, password, email)) {
+        if (authService.register(username, password, email)) {
             showSuccess("Account created! Redirecting to login...");
             new Thread(() -> {
                 try {
@@ -54,13 +61,8 @@ public class RegisterController {
 
     @FXML
     private void handleBackToLogin() {
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource("/fxml/LoginView.fxml"));
-            Stage stage = (Stage) usernameField.getScene().getWindow();
-            stage.setScene(new Scene(root));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        Stage stage = (Stage) usernameField.getScene().getWindow();
+        app.showLoginView(stage);
     }
 
     private void showError(String message) {

@@ -1,36 +1,40 @@
 package com.emsi.expensetracker.controller;
 
-import com.emsi.expensetracker.service.AuthService;
+import com.emsi.expensetracker.service.implementation.AuthService;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
-
 import java.net.URL;
 import java.util.ResourceBundle;
+import com.emsi.expensetracker.MainApp;
 
 public class MainController implements Initializable {
+    AuthService authService ;
+    MainApp app ;
+
+    public MainController(MainApp app ,AuthService authService) {
+        this.authService = authService;
+        this.app = app;
+    }
+
     @FXML private Label userLabel;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        if (AuthService.getCurrentUser() != null) {
-            userLabel.setText("Welcome, " + AuthService.getCurrentUser().getUsername() + "!");
+        if (authService.getCurrentUser() != null) {
+            userLabel.setText("Welcome, " + authService.getCurrentUser().getUsername() + "!");
         }
     }
 
     @FXML
     private void handleLogout() {
-        AuthService.logout();
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource("/fxml/LoginView.fxml"));
-            Stage stage = (Stage) userLabel.getScene().getWindow();
-            stage.setScene(new Scene(root, 600, 400));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        LoginController controller = new LoginController(app, authService);
+        Scene scene = app.loadScene("/fxml/LoginView.fxml", controller);
+        Stage stage = (Stage) userLabel.getScene().getWindow();
+        stage.setScene(scene);
+        authService.logout();
+
     }
 }
