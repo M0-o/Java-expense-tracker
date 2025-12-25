@@ -7,17 +7,22 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.emsi.expensetracker.dao.base.BaseDAO;
+import com.emsi.expensetracker.dao.base.BaseDAOClass;
 import com.emsi.expensetracker.model.Expense;
 import com.emsi.expensetracker.util.DatabaseConnection;
 
 
 
-public class ExpenseDAO implements BaseDAO<Expense,Integer> {
+public class ExpenseDAO extends BaseDAOClass<Expense, Integer> {
+
+  
+    public ExpenseDAO(DatabaseConnection dbConnection) {
+        super(dbConnection);
+    }
 
     @Override 
      public Expense findById(Integer id) {
-        try( Connection conn= DatabaseConnection.getConnection();
+        try( Connection conn= dbConnection.getConnection();
              var stmt= conn.prepareStatement("Select * from expenses where id=?")){
                 stmt.setInt(1,id);
                 var rs= stmt.executeQuery();
@@ -40,7 +45,7 @@ public class ExpenseDAO implements BaseDAO<Expense,Integer> {
     @Override
     public List<Expense> findAll() {
         List<Expense> expenses = new ArrayList<>();
-        try (Connection conn = DatabaseConnection.getConnection();
+        try (Connection conn = dbConnection.getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery("SELECT * FROM expenses")) {
 
@@ -63,7 +68,7 @@ public class ExpenseDAO implements BaseDAO<Expense,Integer> {
 
      @Override
      public boolean save(Expense expense) {
-        try (Connection conn = DatabaseConnection.getConnection();
+        try (Connection conn = dbConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(
                      "INSERT INTO expenses (description, amount, date ,category_id, user_id) VALUES (?, ?, ?, ?, ?)"
              )) {
@@ -83,7 +88,7 @@ public class ExpenseDAO implements BaseDAO<Expense,Integer> {
 
      @Override
      public boolean update(Expense expense) {
-        try (Connection conn = DatabaseConnection.getConnection();
+        try (Connection conn = dbConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(
                      "UPDATE expenses SET description = ?, amount = ?, date = ? , category_id = ? WHERE id = ?"
              )) {
@@ -103,7 +108,7 @@ public class ExpenseDAO implements BaseDAO<Expense,Integer> {
     
      @Override
      public boolean delete(Integer id) {
-        try (Connection conn = DatabaseConnection.getConnection();
+        try (Connection conn = dbConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(
                      "DELETE FROM expenses WHERE id = ?"
              )) {
@@ -114,5 +119,30 @@ public class ExpenseDAO implements BaseDAO<Expense,Integer> {
             e.printStackTrace();
         }
         return false;
+     }
+
+     public List<Expense> findByUserId(int userId) {
+        List<Expense> expenses = new ArrayList<>();
+        try (Connection conn = dbConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement("SELECT * FROM expenses WHERE user_id = ?")) {
+            stmt.setInt(1, userId);
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    Expense expense = new Expense(
+                            rs.getInt("id"),
+                            rs.getString("description"),
+                            rs.getDouble("amount"),
+                            rs.getInt("category_id"),
+                            rs.getString("date"),
+                            rs.getInt("user_id")
+                    );
+                    expenses.add(expense);
+                }
+                return expenses;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return expenses;
      }
 }
