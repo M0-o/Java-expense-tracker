@@ -10,6 +10,7 @@ import java.util.List;
 
 import com.emsi.expensetracker.dao.base.BaseDAOClass;
 import com.emsi.expensetracker.model.Category;
+import com.emsi.expensetracker.service.implementation.CategoryService;
 import com.emsi.expensetracker.util.DatabaseConnection;
 
 /**
@@ -26,7 +27,13 @@ public class CategoryDAO extends BaseDAOClass<Category, Integer> {
      */
     public CategoryDAO(DatabaseConnection dbConnection) {
         super(dbConnection);
+
     }
+
+    private DatabaseConnection databaseConnection;
+
+
+
 
     /**
      * Finds a category by its unique identifier.

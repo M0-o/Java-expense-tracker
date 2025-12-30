@@ -18,7 +18,7 @@
                   <Button layoutX="14.0" layoutY="138.0" mnemonicParsing="false" onAction="#handleViewExpenses" prefHeight="26.0" prefWidth="163.0" text="Expense List Page" />
                   <Button layoutX="14.0" layoutY="185.0" mnemonicParsing="false" onAction="#handleAddExpense" prefHeight="26.0" prefWidth="163.0" text="Expense Form" />
                   <Text layoutX="53.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Page selection :" />
-                  <Button layoutX="14.0" layoutY="229.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="163.0" text="Category Form" />
+                  <Button layoutX="14.0" layoutY="229.0" mnemonicParsing="false" onAction="#handleViewCategories" prefHeight="26.0" prefWidth="163.0" text="Category Form" />
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="367.0" prefWidth="590.0">

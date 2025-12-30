@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Text?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <TextField layoutX="216.0" layoutY="93.0" />
-      <TextArea layoutX="216.0" layoutY="142.0" prefHeight="200.0" prefWidth="200.0" />
-      <Text layoutX="68.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Category name :" />
-      <Text layoutX="68.0" layoutY="156.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Category description :" />
-   </children>
+    <children>
+        <TextField fx:id="categoryNameField" layoutX="216.0" layoutY="93.0" />
+        <TextArea fx:id="categoryDescriptionArea" layoutX="216.0" layoutY="142.0" prefHeight="200.0" prefWidth="200.0" />
+        <ListView fx:id="categoryListView" layoutX="450.0" layoutY="93.0" prefHeight="249.0" prefWidth="120.0" />
+        <Button fx:id="saveButton" layoutX="216.0" layoutY="360.0" text="Save" />
+        <Text layoutX="68.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Category name :" />
+        <Text layoutX="68.0" layoutY="156.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Category description :" />
+    </children>
 </Pane>

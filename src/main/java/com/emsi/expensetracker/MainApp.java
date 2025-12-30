@@ -1,5 +1,6 @@
 package com.emsi.expensetracker;
 
+import com.emsi.expensetracker.controller.CategoryController;
 import com.emsi.expensetracker.controller.LoginController;
 import com.emsi.expensetracker.controller.SaveExpenseController;
 import com.emsi.expensetracker.controller.ExpenseListActionController;
@@ -53,6 +54,12 @@ public class MainApp extends Application {
     public ExpenseListActionController createExpenseListController() {
         return new ExpenseListActionController(this, authService, expenseService, categoryService);
     }
+
+    public CategoryController createCategoryController() {
+        return new CategoryController(categoryService, authService);
+    }
+
+
 
     @Override
     public void stop() {

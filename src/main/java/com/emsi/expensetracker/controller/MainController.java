@@ -48,6 +48,16 @@ public class MainController implements Initializable {
         stage.setScene(scene);
     }
 
+
+
+    @FXML
+    private void handleViewCategories() {
+        CategoryController controller = app.createCategoryController();
+        Scene scene = app.loadScene("/fxml/CategoryFormView.fxml", controller);
+        Stage stage = (Stage) userLabel.getScene().getWindow();
+        stage.setScene(scene);
+    }
+
     @FXML
     private void handleLogout() {
         LoginController controller = new LoginController(app, authService);
@@ -56,4 +66,5 @@ public class MainController implements Initializable {
         stage.setScene(scene);
         authService.logout();
     }
+
 }
