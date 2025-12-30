@@ -1,10 +1,15 @@
-
 package com.emsi.expensetracker;
 
 import com.emsi.expensetracker.controller.LoginController;
+import com.emsi.expensetracker.controller.SaveExpenseController;
+import com.emsi.expensetracker.controller.ExpenseListActionController;
 import com.emsi.expensetracker.util.DatabaseConnection;
 import com.emsi.expensetracker.dao.implementation.AuthDAO;
+import com.emsi.expensetracker.dao.implementation.ExpenseDAO;
+import com.emsi.expensetracker.dao.implementation.CategoryDAO;
 import com.emsi.expensetracker.service.implementation.AuthService;
+import com.emsi.expensetracker.service.implementation.ExpenseService;
+import com.emsi.expensetracker.service.implementation.CategoryService;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,7 +20,13 @@ import java.io.IOException;
 public class MainApp extends Application {
 
     private final DatabaseConnection dbConnection = new DatabaseConnection();
-    private final AuthService authService = new AuthService(new AuthDAO(dbConnection));
+    private final AuthDAO authDAO = new AuthDAO(dbConnection);
+    private final ExpenseDAO expenseDAO = new ExpenseDAO(dbConnection);
+    private final CategoryDAO categoryDAO = new CategoryDAO(dbConnection);
+
+    private final AuthService authService = new AuthService(authDAO);
+    private final ExpenseService expenseService = new ExpenseService(expenseDAO);
+    private final CategoryService categoryService = new CategoryService(categoryDAO);
 
     @Override
     public void init() {
@@ -27,11 +38,20 @@ public class MainApp extends Application {
         showLoginView(primaryStage);
     }
 
-    public void showLoginView(Stage primaryStage){
-        LoginController controller = new LoginController(this ,authService);
+    public void showLoginView(Stage primaryStage) {
+        LoginController controller = new LoginController(this, authService);
         Scene scene = loadScene("/fxml/LoginView.fxml", controller);
         primaryStage.setScene(scene);
+        primaryStage.setTitle("Expense Tracker - Login");
         primaryStage.show();
+    }
+
+    public SaveExpenseController createSaveExpenseController() {
+        return new SaveExpenseController(this, authService, expenseService, categoryService);
+    }
+
+    public ExpenseListActionController createExpenseListController() {
+        return new ExpenseListActionController(this, authService, expenseService, categoryService);
     }
 
     @Override
