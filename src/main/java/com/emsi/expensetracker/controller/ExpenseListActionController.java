@@ -1,13 +1,14 @@
-package com.emsi.expensetracker.controller.Implementation;
-
+package com.emsi.expensetracker.controller;
 
 import com.emsi.expensetracker.model.Expense;
-import javafx.fxml.FXML;
-import javafx.scene.control.*;
-import javafx.scene.layout.HBox;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.TableCell;
 
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableCell;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.HBox;
 
 public class ExpenseListActionController {
 
@@ -23,7 +24,6 @@ public class ExpenseListActionController {
     private TableColumn<Expense, String> dateColumn;
     @FXML
     private TableColumn<Expense, Void> actionsColumn;
-
 
     @FXML
     public void initialize() {
