@@ -8,13 +8,12 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" >
+<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <TextField fx:id="usernameField" layoutX="196.0" layoutY="142.0" prefHeight="25.0" prefWidth="235.0" />
       <PasswordField fx:id="passwordField" layoutX="196.0" layoutY="188.0" prefHeight="25.0" prefWidth="235.0" />
-      <Button layoutX="254.0" layoutY="241.0" mnemonicParsing="false" onAction="#handleRegister" text="Register" />
-      <Button layoutX="324.0" layoutY="241.0" mnemonicParsing="false" onAction="#handleLogin" text="Login" />
+      <Button layoutX="215.0" layoutY="241.0" mnemonicParsing="false" onAction="#handleRegister" styleClass="btn-secondary" text="Register" />
+      <Button layoutX="330.0" layoutY="241.0" mnemonicParsing="false" onAction="#handleLogin" styleClass="btn-primary" text="Login" />
       <Label fx:id="errorLabel" layoutX="196.0" layoutY="275.0" prefHeight="17.0" prefWidth="235.0" textFill="RED" visible="false" />
       <Text layoutX="107.0" layoutY="159.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username">
          <font>

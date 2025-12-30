@@ -9,19 +9,19 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <TextField fx:id="amountField" layoutX="222.0" layoutY="109.0" />
-      <TextArea fx:id="descriptionField" layoutX="222.0" layoutY="172.0" prefHeight="200.0" prefWidth="200.0" />
-      <Text layoutX="104.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Amount :" />
+      <TextField fx:id="amountField" layoutX="219.0" layoutY="102.0" prefWidth="245.0" />
+      <TextArea fx:id="descriptionField" layoutX="222.0" layoutY="211.0" prefHeight="200.0" prefWidth="245.0" />
+      <Text layoutX="104.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Amount :" />
       <Text layoutX="132.0" layoutY="177.0" strokeType="OUTSIDE" strokeWidth="0.0" />
-      <Text layoutX="109.0" layoutY="186.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description :" />
-      <Button fx:id="confirmationButton" layoutX="493.0" layoutY="340.0" mnemonicParsing="false" onMouseClicked="#handleSaveExpense" text="Add" />
+      <Text layoutX="102.0" layoutY="227.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description :" />
+      <Button fx:id="confirmationButton" layoutX="493.0" layoutY="340.0" mnemonicParsing="false" onMouseClicked="#handleSaveExpense" styleClass="btn-primary" text="Add" />
       <Label fx:id="errorLabel" layoutX="92.0" layoutY="303.0" />
-      <ChoiceBox fx:id="categoryChoice" layoutX="222.0" layoutY="69.0" prefWidth="150.0" />
-      <Text layoutX="105.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Category :" />
-      <DatePicker fx:id="dateField" layoutX="222.0" layoutY="140.0" />
-      <Text layoutX="108.0" layoutY="156.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date :" />
-      <Button fx:id="backButton" layoutX="436.0" layoutY="340.0" mnemonicParsing="false" onMouseClicked="#handleBack" text="Back" />
+      <ChoiceBox fx:id="categoryChoice" layoutX="221.0" layoutY="55.0" prefWidth="245.0" />
+      <Text layoutX="105.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Category :" />
+      <DatePicker fx:id="dateField" layoutX="221.0" layoutY="147.0" />
+      <Text layoutX="104.0" layoutY="181.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date :" />
+      <Button fx:id="backButton" layoutX="414.0" layoutY="340.0" mnemonicParsing="false" onMouseClicked="#handleBack" styleClass="btn-secondary" text="Back" />
    </children>
 </Pane>

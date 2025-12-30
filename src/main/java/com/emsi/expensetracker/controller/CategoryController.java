@@ -2,18 +2,22 @@ package com.emsi.expensetracker.controller;
 
 import java.util.List;
 
+import com.emsi.expensetracker.MainApp;
 import com.emsi.expensetracker.model.Category;
 import com.emsi.expensetracker.model.User;
 import com.emsi.expensetracker.service.implementation.CategoryService;
 import com.emsi.expensetracker.service.implementation.AuthService;
 
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
 public class CategoryController {
 
+    private final MainApp app;
     private final CategoryService categoryService;
     private final AuthService authService;
 
@@ -26,7 +30,8 @@ public class CategoryController {
     @FXML
     private Label errorLabel;
 
-    public CategoryController(CategoryService categoryService, AuthService authService) {
+    public CategoryController(MainApp app, CategoryService categoryService, AuthService authService) {
+        this.app = app;
         this.categoryService = categoryService;
         this.authService = authService;
     }
@@ -98,5 +103,17 @@ public class CategoryController {
         errorLabel.setStyle("-fx-text-fill: green;");
         errorLabel.setText(message);
         errorLabel.setVisible(true);
+    }
+
+    @FXML
+    private void handleBack() {
+        navigateToMainView();
+    }
+
+    private void navigateToMainView() {
+        MainController controller = new MainController(app, authService);
+        Scene scene = app.loadScene("/fxml/MainView.fxml", controller);
+        Stage stage = (Stage) categoryNameField.getScene().getWindow();
+        stage.setScene(scene);
     }
 }

@@ -56,7 +56,7 @@ public class MainApp extends Application {
     }
 
     public CategoryController createCategoryController() {
-        return new CategoryController(categoryService, authService);
+        return new CategoryController(this, categoryService, authService);
     }
 
 
