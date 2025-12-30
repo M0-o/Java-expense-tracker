@@ -1,24 +1,25 @@
 package com.emsi.expensetracker.controller;
 
 import java.time.LocalDate;
-import java.util.Locale;
+import java.util.List;
 
+import com.emsi.expensetracker.MainApp;
+import com.emsi.expensetracker.model.Category;
+import com.emsi.expensetracker.model.Expense;
+import com.emsi.expensetracker.model.User;
 import com.emsi.expensetracker.service.implementation.AuthService;
+import com.emsi.expensetracker.service.implementation.CategoryService;
+import com.emsi.expensetracker.service.implementation.ExpenseService;
 
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-
-import com.emsi.expensetracker.MainApp;
-import com.emsi.expensetracker.service.implementation.ExpenseService;
-import com.emsi.expensetracker.model.Expense;
-import com.emsi.expensetracker.model.Category;
-
-import java.util.List;
-
-import com.emsi.expensetracker.service.implementation.CategoryService;
-import com.emsi.expensetracker.model.User;
 
 public class SaveExpenseController {
 
@@ -34,7 +35,7 @@ public class SaveExpenseController {
     @FXML
     private DatePicker dateField;
     @FXML
-    private TextField descriptionField;
+    private TextArea descriptionField;
     @FXML
     private Label errorLabel;
     @FXML
@@ -50,6 +51,12 @@ public class SaveExpenseController {
     @FXML
     void initialize() {
         User currentUser = authService.getCurrentUser();
+        if (currentUser == null) {
+            System.err.println("Error: No user logged in!");
+            errorLabel.setText("Error: No user logged in. Please log in again.");
+            errorLabel.setVisible(true);
+            return;
+        }
         List<Category> categories = categoryService.getAvailableCategories(currentUser.getId());
         categoryChoice.getItems().addAll(categories);
     }
@@ -61,30 +68,89 @@ public class SaveExpenseController {
         String description = descriptionField.getText().trim();
         LocalDate date = dateField.getValue();
 
-        if (amountText.isEmpty()) {
-            showError("amount are required");
+        // Validation
+        if (category == null) {
+            showError("Please select a category");
             return;
         }
+
+        if (amountText.isEmpty()) {
+            showError("Amount is required");
+            return;
+        }
+
+        if (date == null) {
+            showError("Please select a date");
+            return;
+        }
+
         double amount;
         try {
             amount = Double.parseDouble(amountText);
+            if (amount <= 0) {
+                showError("Amount must be greater than zero");
+                return;
+            }
         } catch (NumberFormatException e) {
             showError("Invalid amount format");
             return;
         }
 
-        Expense expense = new Expense(description, amount, category.getId(), date, authService.getCurrentUser().getId());
+        User currentUser = authService.getCurrentUser();
+        if (currentUser == null) {
+            showError("Session expired. Please log in again.");
+            return;
+        }
+
+        Expense expense = new Expense(description, amount, category.getId(), date, currentUser.getId());
         boolean result = expenseService.createExpense(expense);
 
+        if (result) {
+            showSuccess("Expense saved successfully!");
+            clearForm();
+            // Optional: Navigate back to expense list or main view after a delay
+            new Thread(() -> {
+                try {
+                    Thread.sleep(1500);
+                    javafx.application.Platform.runLater(this::navigateToMainView);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }).start();
+        } else {
+            showError("Failed to save expense. Please try again.");
+        }
+    }
+
+    private void clearForm() {
+        amountField.clear();
+        descriptionField.clear();
+        dateField.setValue(null);
+        categoryChoice.setValue(null);
+        errorLabel.setVisible(false);
+    }
+
+    private void navigateToMainView() {
+        MainController controller = new MainController(app, authService);
+        Scene scene = app.loadScene("/fxml/MainView.fxml", controller);
+        Stage stage = (Stage) amountField.getScene().getWindow();
+        stage.setScene(scene);
+    }
+
+    @FXML
+    private void handleBack() {
+        navigateToMainView();
     }
 
     private void showError(String message) {
         errorLabel.setStyle("-fx-text-fill: red;");
         errorLabel.setText(message);
+        errorLabel.setVisible(true);
     }
 
     private void showSuccess(String message) {
         errorLabel.setStyle("-fx-text-fill: green;");
         errorLabel.setText(message);
+        errorLabel.setVisible(true);
     }
 }
