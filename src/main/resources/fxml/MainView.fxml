@@ -18,6 +18,8 @@
          </font>
       </Label>
       <Label text="Authentication successful!" textAlignment="CENTER" wrapText="true" />
+      <Button mnemonicParsing="false" onAction="#handleViewExpenses" text="View Expenses" />
+      <Button mnemonicParsing="false" onAction="#handleAddExpense" text="Add Expense" />
       <Button mnemonicParsing="false" onAction="#handleLogout" text="Logout" />
    </children>
 </VBox>
