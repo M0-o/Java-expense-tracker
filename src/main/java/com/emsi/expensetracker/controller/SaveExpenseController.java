@@ -73,7 +73,7 @@ public class SaveExpenseController {
             return;
         }
 
-        Expense expense = new Expense(description,amount,category.getId(),date,authService.getCurrentUser().getId());
+        Expense expense = new Expense(description, amount, category.getId(), date, authService.getCurrentUser().getId());
         boolean result = expenseService.createExpense(expense);
 
     }
