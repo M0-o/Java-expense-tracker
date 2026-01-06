@@ -7,21 +7,42 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <TextField fx:id="amountField" layoutX="219.0" layoutY="102.0" prefWidth="245.0" />
-      <TextArea fx:id="descriptionField" layoutX="222.0" layoutY="211.0" prefHeight="200.0" prefWidth="245.0" />
-      <Text layoutX="104.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Amount :" />
-      <Text layoutX="132.0" layoutY="177.0" strokeType="OUTSIDE" strokeWidth="0.0" />
-      <Text layoutX="102.0" layoutY="227.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description :" />
-      <Button fx:id="confirmationButton" layoutX="493.0" layoutY="340.0" mnemonicParsing="false" onMouseClicked="#handleSaveExpense" styleClass="btn-primary" text="Add" />
-      <Label fx:id="errorLabel" layoutX="92.0" layoutY="303.0" />
-      <ChoiceBox fx:id="categoryChoice" layoutX="221.0" layoutY="55.0" prefWidth="245.0" />
-      <Text layoutX="105.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Category :" />
-      <DatePicker fx:id="dateField" layoutX="221.0" layoutY="147.0" />
-      <Text layoutX="104.0" layoutY="181.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date :" />
-      <Button fx:id="backButton" layoutX="414.0" layoutY="340.0" mnemonicParsing="false" onMouseClicked="#handleBack" styleClass="btn-secondary" text="Back" />
+      <Text layoutX="500.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add New Expense">
+         <font>
+            <Font size="28.0" />
+         </font>
+      </Text>
+      <Text layoutX="350.0" layoutY="210.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Category :">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <ChoiceBox fx:id="categoryChoice" layoutX="500.0" layoutY="190.0" prefHeight="35.0" prefWidth="380.0" />
+      <Text layoutX="350.0" layoutY="270.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Amount :">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <TextField fx:id="amountField" layoutX="500.0" layoutY="250.0" prefHeight="35.0" prefWidth="380.0" />
+      <Text layoutX="350.0" layoutY="330.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date :">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <DatePicker fx:id="dateField" layoutX="500.0" layoutY="310.0" prefHeight="35.0" prefWidth="380.0" />
+      <Text layoutX="350.0" layoutY="390.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description :">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <TextArea fx:id="descriptionField" layoutX="500.0" layoutY="370.0" prefHeight="150.0" prefWidth="380.0" />
+      <Button fx:id="backButton" layoutX="500.0" layoutY="560.0" mnemonicParsing="false" onMouseClicked="#handleBack" prefHeight="40.0" prefWidth="130.0" styleClass="btn-secondary" text="Back" />
+      <Button fx:id="confirmationButton" layoutX="750.0" layoutY="560.0" mnemonicParsing="false" onMouseClicked="#handleSaveExpense" prefHeight="40.0" prefWidth="130.0" styleClass="btn-primary" text="Add" />
+      <Label fx:id="errorLabel" layoutX="350.0" layoutY="630.0" prefHeight="20.0" prefWidth="530.0" textAlignment="CENTER" textFill="RED" />
    </children>
 </Pane>

@@ -11,6 +11,7 @@ import com.emsi.expensetracker.service.implementation.AuthService;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
@@ -24,7 +25,7 @@ public class CategoryController {
     @FXML
     private TextField categoryNameField;
     @FXML
-    private TextField categoryDescriptionField;
+    private TextArea categoryDescriptionField;
     @FXML
     private ListView<Category> categoryListView;
     @FXML

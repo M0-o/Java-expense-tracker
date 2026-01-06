@@ -8,27 +8,27 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <TextField fx:id="usernameField" layoutX="196.0" layoutY="142.0" prefHeight="25.0" prefWidth="235.0" />
-      <PasswordField fx:id="passwordField" layoutX="196.0" layoutY="188.0" prefHeight="25.0" prefWidth="235.0" />
-      <Button layoutX="215.0" layoutY="241.0" mnemonicParsing="false" onAction="#handleRegister" styleClass="btn-secondary" text="Register" />
-      <Button layoutX="330.0" layoutY="241.0" mnemonicParsing="false" onAction="#handleLogin" styleClass="btn-primary" text="Login" />
-      <Label fx:id="errorLabel" layoutX="196.0" layoutY="275.0" prefHeight="17.0" prefWidth="235.0" textFill="RED" visible="false" />
-      <Text layoutX="107.0" layoutY="159.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username">
+      <Text layoutX="540.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LOGIN PAGE" textAlignment="CENTER">
          <font>
-            <Font size="13.0" />
+            <Font size="32.0" />
          </font>
       </Text>
-      <Text layoutX="106.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" wrappingWidth="59.33333333333337">
+      <Text layoutX="420.0" layoutY="290.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username">
          <font>
-            <Font size="13.0" />
+            <Font size="16.0" />
          </font>
       </Text>
-      <Text layoutX="238.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LOGIN PAGE" wrappingWidth="124.4818115234375">
+      <TextField fx:id="usernameField" layoutX="520.0" layoutY="270.0" prefHeight="35.0" prefWidth="300.0" />
+      <Text layoutX="420.0" layoutY="360.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password">
          <font>
-            <Font size="22.0" />
+            <Font size="16.0" />
          </font>
       </Text>
+      <PasswordField fx:id="passwordField" layoutX="520.0" layoutY="340.0" prefHeight="35.0" prefWidth="300.0" />
+      <Button layoutX="520.0" layoutY="420.0" mnemonicParsing="false" onAction="#handleRegister" prefHeight="40.0" prefWidth="130.0" styleClass="btn-secondary" text="Register" />
+      <Button layoutX="690.0" layoutY="420.0" mnemonicParsing="false" onAction="#handleLogin" prefHeight="40.0" prefWidth="130.0" styleClass="btn-primary" text="Login" />
+      <Label fx:id="errorLabel" layoutX="420.0" layoutY="490.0" prefHeight="20.0" prefWidth="440.0" textAlignment="CENTER" textFill="RED" visible="false" />
    </children>
 </AnchorPane>

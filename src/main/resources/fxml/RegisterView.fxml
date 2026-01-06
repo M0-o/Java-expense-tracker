@@ -8,39 +8,39 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Text layoutX="224.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="REGISTER PAGE" wrappingWidth="151.81512451171875">
+      <Text layoutX="515.0" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0" text="REGISTER PAGE" textAlignment="CENTER">
          <font>
-            <Font size="22.0" />
+            <Font size="32.0" />
          </font>
       </Text>
-      <Text layoutX="82.0" layoutY="159.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username">
+      <Text layoutX="400.0" layoutY="275.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username">
          <font>
-            <Font size="13.0" />
+            <Font size="16.0" />
          </font>
       </Text>
-      <TextField fx:id="usernameField" layoutX="206.0" layoutY="142.0" prefHeight="25.0" prefWidth="235.0" />
-      <TextField fx:id="emailField" layoutX="206.0" layoutY="177.0" prefHeight="25.0" prefWidth="235.0" />
-      <PasswordField fx:id="passwordField" layoutX="206.0" layoutY="212.0" prefHeight="25.0" prefWidth="235.0" />
-      <PasswordField fx:id="confirmPasswordField" layoutX="206.0" layoutY="247.0" prefHeight="25.0" prefWidth="235.0" />
-      <Label fx:id="errorLabel" layoutX="206.0" layoutY="330.0" prefHeight="17.0" prefWidth="235.0" textFill="RED" visible="false" />
-      <Text layoutX="82.0" layoutY="229.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" wrappingWidth="59.33333333333337">
+      <TextField fx:id="usernameField" layoutX="520.0" layoutY="255.0" prefHeight="35.0" prefWidth="300.0" />
+      <Text layoutX="400.0" layoutY="330.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email">
          <font>
-            <Font size="13.0" />
+            <Font size="16.0" />
          </font>
       </Text>
-      <Text layoutX="82.0" layoutY="194.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email" wrappingWidth="59.33333333333337">
+      <TextField fx:id="emailField" layoutX="520.0" layoutY="310.0" prefHeight="35.0" prefWidth="300.0" />
+      <Text layoutX="400.0" layoutY="385.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password">
          <font>
-            <Font size="13.0" />
+            <Font size="16.0" />
          </font>
       </Text>
-      <Text layoutX="82.0" layoutY="264.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Confirm password" wrappingWidth="108.66670735677087">
+      <PasswordField fx:id="passwordField" layoutX="520.0" layoutY="365.0" prefHeight="35.0" prefWidth="300.0" />
+      <Text layoutX="400.0" layoutY="440.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Confirm Password">
          <font>
-            <Font size="13.0" />
+            <Font size="16.0" />
          </font>
       </Text>
-      <Button layoutX="241.0" layoutY="294.0" mnemonicParsing="false" onAction="#handleRegister" styleClass="btn-primary" text="Create" />
-      <Button layoutX="335.0" layoutY="294.0" mnemonicParsing="false" onAction="#handleBackToLogin" styleClass="btn-secondary" text="Back" />
+      <PasswordField fx:id="confirmPasswordField" layoutX="520.0" layoutY="420.0" prefHeight="35.0" prefWidth="300.0" />
+      <Button layoutX="520.0" layoutY="500.0" mnemonicParsing="false" onAction="#handleRegister" prefHeight="40.0" prefWidth="130.0" styleClass="btn-primary" text="Create" />
+      <Button layoutX="690.0" layoutY="500.0" mnemonicParsing="false" onAction="#handleBackToLogin" prefHeight="40.0" prefWidth="130.0" styleClass="btn-secondary" text="Back" />
+      <Label fx:id="errorLabel" layoutX="400.0" layoutY="570.0" prefHeight="20.0" prefWidth="480.0" textAlignment="CENTER" textFill="RED" visible="false" />
    </children>
 </AnchorPane>

@@ -1,20 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <TextField fx:id="categoryNameField" layoutX="216.0" layoutY="93.0" />
-        <TextArea fx:id="categoryDescriptionArea" layoutX="216.0" layoutY="142.0" prefHeight="200.0" prefWidth="200.0" />
-        <ListView fx:id="categoryListView" layoutX="450.0" layoutY="93.0" prefHeight="249.0" prefWidth="120.0" />
-        <Button fx:id="saveButton" layoutX="323.0" layoutY="348.0" styleClass="btn-primary" text="Save" />
-        <Text layoutX="66.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="form-label" text="Category name :" />
-        <Text layoutX="55.0" layoutY="167.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="form-label" text="Category description :" wrappingWidth="135.3720703125" />
-      <Button layoutX="228.0" layoutY="348.0" mnemonicParsing="false" onAction="#handleBack" styleClass="btn-secondary" text="Back" />
+        <Text layoutX="490.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Category Management">
+            <font>
+                <Font size="28.0" />
+            </font>
+        </Text>
+        <Text layoutX="200.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Category Name :">
+            <font>
+                <Font size="16.0" />
+            </font>
+        </Text>
+        <TextField fx:id="categoryNameField" layoutX="380.0" layoutY="180.0" prefHeight="35.0" prefWidth="350.0" />
+        <Text layoutX="200.0" layoutY="265.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description :">
+            <font>
+                <Font size="16.0" />
+            </font>
+        </Text>
+        <TextArea fx:id="categoryDescriptionField" layoutX="380.0" layoutY="245.0" prefHeight="150.0" prefWidth="350.0" />
+        <Button fx:id="addButton" layoutX="380.0" layoutY="420.0" onAction="#handleAddCategory" prefHeight="40.0" prefWidth="150.0" styleClass="btn-primary" text="Add Category" />
+        <Button layoutX="580.0" layoutY="420.0" mnemonicParsing="false" onAction="#handleBack" prefHeight="40.0" prefWidth="150.0" styleClass="btn-secondary" text="Back" />
+        <Text layoutX="820.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your Categories :">
+            <font>
+                <Font size="16.0" />
+            </font>
+        </Text>
+        <ListView fx:id="categoryListView" layoutX="820.0" layoutY="220.0" prefHeight="300.0" prefWidth="300.0" />
+        <Button layoutX="820.0" layoutY="540.0" mnemonicParsing="false" onAction="#handleDeleteCategory" prefHeight="40.0" prefWidth="300.0" styleClass="btn-danger" text="Delete Selected" />
+        <Label fx:id="errorLabel" layoutX="200.0" layoutY="500.0" prefHeight="20.0" prefWidth="530.0" textAlignment="CENTER" textFill="RED" visible="false" />
     </children>
 </Pane>

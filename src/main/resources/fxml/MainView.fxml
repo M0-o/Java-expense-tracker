@@ -8,33 +8,41 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox alignment="CENTER" prefHeight="511.0" prefWidth="793.0" spacing="20.0" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="CENTER" prefHeight="720.0" prefWidth="1280.0" spacing="20.0" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <SplitPane dividerPositions="0.24968394437420985" prefHeight="516.0" prefWidth="793.0">
+      <SplitPane dividerPositions="0.2" prefHeight="720.0" prefWidth="1280.0">
         <items>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" style="-fx-padding: 10;">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="720.0" prefWidth="250.0" style="-fx-padding: 20;">
                <children>
-                  <Button layoutX="14.0" layoutY="60.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="163.0" text="Home Page" />
-                  <Button layoutX="14.0" layoutY="110.0" mnemonicParsing="false" onAction="#handleViewExpenses" prefHeight="26.0" prefWidth="163.0" text="Expense List Page" />
-                  <Button layoutX="14.0" layoutY="160.0" mnemonicParsing="false" onAction="#handleAddExpense" prefHeight="26.0" prefWidth="163.0" text="Expense Form" />
-                  <Text layoutX="40.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Page selection :" style="-fx-font-weight: bold;" />
-                  <Button layoutX="14.0" layoutY="210.0" mnemonicParsing="false" onAction="#handleViewCategories" prefHeight="26.0" prefWidth="163.0" text="Category Form" />
-               </children>
-            </AnchorPane>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="367.0" prefWidth="590.0" style="-fx-padding: 20;">
-               <children>
-                  <Button layoutX="267.0" layoutY="350.0" mnemonicParsing="false" onAction="#handleLogout" text="Logout" styleClass="btn-danger" />
-                  <Label layoutX="223.0" layoutY="290.0" text="Authentication successful!" textAlignment="CENTER" wrapText="true" />
-                  <Label fx:id="userLabel" layoutX="235.0" layoutY="250.0" text="Welcome, User!" textAlignment="CENTER">
+                  <Text layoutX="40.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="Page Selection">
                      <font>
                         <Font size="18.0" />
                      </font>
+                  </Text>
+                  <Button layoutX="20.0" layoutY="100.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="200.0" text="Home Page" />
+                  <Button layoutX="20.0" layoutY="160.0" mnemonicParsing="false" onAction="#handleViewExpenses" prefHeight="40.0" prefWidth="200.0" text="Expense List Page" />
+                  <Button layoutX="20.0" layoutY="220.0" mnemonicParsing="false" onAction="#handleAddExpense" prefHeight="40.0" prefWidth="200.0" text="Expense Form" />
+                  <Button layoutX="20.0" layoutY="280.0" mnemonicParsing="false" onAction="#handleViewCategories" prefHeight="40.0" prefWidth="200.0" text="Category Form" />
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="720.0" prefWidth="1000.0" style="-fx-padding: 40;">
+               <children>
+                  <Label alignment="CENTER" layoutX="308.0" layoutY="73.0" prefHeight="116.0" prefWidth="405.0" text="Welcome to Expense Tracker!" textAlignment="CENTER">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
                   </Label>
-                  <Label layoutX="145.0" layoutY="200.0" text="Welcome to Expense Tracker!" textAlignment="CENTER">
+                  <Label fx:id="userLabel" layoutX="463.0" layoutY="189.0" text="Welcome, User!" textAlignment="CENTER">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
+                  <Label layoutX="433.0" layoutY="248.0" text="Authentication successful!" textAlignment="CENTER" wrapText="true">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Button layoutX="450.0" layoutY="392.0" mnemonicParsing="false" onAction="#handleLogout" prefHeight="40.0" prefWidth="120.0" styleClass="btn-danger" text="Logout" />
                </children>
             </AnchorPane>
         </items>

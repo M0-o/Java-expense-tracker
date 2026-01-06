@@ -36,6 +36,9 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        primaryStage.setWidth(1280);
+        primaryStage.setHeight(720);
+        primaryStage.setResizable(false);
         showLoginView(primaryStage);
     }
 
