@@ -99,8 +99,11 @@ public class ExpenseListActionController {
             return;
         }
 
-        // TODO: Open edit dialog/form
-        showInfo("Edit functionality coming soon!");
+        ModifyExpenseController controller = new ModifyExpenseController(app, authService, expenseService, categoryService, expense);
+        Scene scene = app.loadScene("/fxml/ExpenseFormView.fxml", controller);
+        Stage stage = (Stage) expenseTable.getScene().getWindow();
+        stage.setScene(scene);
+
     }
 
     private void handleDelete(Expense expense) {

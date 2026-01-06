@@ -1,22 +1,24 @@
 package com.emsi.expensetracker;
 
+import java.io.IOException;
+
 import com.emsi.expensetracker.controller.CategoryController;
+import com.emsi.expensetracker.controller.ExpenseListActionController;
 import com.emsi.expensetracker.controller.LoginController;
 import com.emsi.expensetracker.controller.SaveExpenseController;
-import com.emsi.expensetracker.controller.ExpenseListActionController;
-import com.emsi.expensetracker.util.DatabaseConnection;
 import com.emsi.expensetracker.dao.implementation.AuthDAO;
-import com.emsi.expensetracker.dao.implementation.ExpenseDAO;
 import com.emsi.expensetracker.dao.implementation.CategoryDAO;
+import com.emsi.expensetracker.dao.implementation.ExpenseDAO;
 import com.emsi.expensetracker.service.implementation.AuthService;
-import com.emsi.expensetracker.service.implementation.ExpenseService;
 import com.emsi.expensetracker.service.implementation.CategoryService;
+import com.emsi.expensetracker.service.implementation.ExpenseService;
+import com.emsi.expensetracker.util.DatabaseConnection;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import java.io.IOException;
 
 public class MainApp extends Application {
 
@@ -57,6 +59,8 @@ public class MainApp extends Application {
     public ExpenseListActionController createExpenseListController() {
         return new ExpenseListActionController(this, authService, expenseService, categoryService);
     }
+
+   
 
     public CategoryController createCategoryController() {
         return new CategoryController(this, categoryService, authService);
