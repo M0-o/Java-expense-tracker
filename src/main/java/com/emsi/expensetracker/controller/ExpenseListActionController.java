@@ -153,7 +153,7 @@ public class ExpenseListActionController {
 
     @FXML
     private void handleBack() {
-        MainController controller = new MainController(app, authService);
+        MainController controller = app.createMainController();
         Scene scene = app.loadScene("/fxml/MainView.fxml", controller);
         Stage stage = (Stage) expenseTable.getScene().getWindow();
         stage.setScene(scene);

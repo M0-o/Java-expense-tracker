@@ -29,8 +29,18 @@ public class RegisterController {
         String password = passwordField.getText();
         String confirmPassword = confirmPasswordField.getText();
 
-        if (username.isEmpty() || password.isEmpty()) {
+        if (username.isEmpty() && password.isEmpty()) {
             showError("Username and password are required");
+            return;
+        }
+
+        if (username.isEmpty()) {
+            showError("Username is required");
+            return;
+        }
+
+        if (password.isEmpty()) {
+            showError("Password is required");
             return;
         }
 

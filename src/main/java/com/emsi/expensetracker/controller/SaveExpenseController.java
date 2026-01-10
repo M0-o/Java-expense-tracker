@@ -15,6 +15,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -59,6 +60,15 @@ public class SaveExpenseController {
         }
         List<Category> categories = categoryService.getAvailableCategories(currentUser.getId());
         categoryChoice.getItems().addAll(categories);
+
+        // Restrict DatePicker to only allow current and past dates
+        dateField.setDayCellFactory(picker -> new DateCell() {
+            @Override
+            public void updateItem(LocalDate date, boolean empty) {
+                super.updateItem(date, empty);
+                setDisable(empty || date.isAfter(LocalDate.now()));
+            }
+        });
     }
 
     @FXML
@@ -81,6 +91,11 @@ public class SaveExpenseController {
 
         if (date == null) {
             showError("Please select a date");
+            return;
+        }
+
+        if(date.isAfter(LocalDate.now())) {
+            showError("Select a valid past date");
             return;
         }
 
@@ -131,7 +146,7 @@ public class SaveExpenseController {
     }
 
     private void navigateToMainView() {
-        MainController controller = new MainController(app, authService);
+        MainController controller = app.createMainController();
         Scene scene = app.loadScene("/fxml/MainView.fxml", controller);
         Stage stage = (Stage) amountField.getScene().getWindow();
         stage.setScene(scene);

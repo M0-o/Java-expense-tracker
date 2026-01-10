@@ -5,6 +5,7 @@ import java.io.IOException;
 import com.emsi.expensetracker.controller.CategoryController;
 import com.emsi.expensetracker.controller.ExpenseListActionController;
 import com.emsi.expensetracker.controller.LoginController;
+import com.emsi.expensetracker.controller.MainController;
 import com.emsi.expensetracker.controller.SaveExpenseController;
 import com.emsi.expensetracker.dao.implementation.AuthDAO;
 import com.emsi.expensetracker.dao.implementation.CategoryDAO;
@@ -64,6 +65,10 @@ public class MainApp extends Application {
 
     public CategoryController createCategoryController() {
         return new CategoryController(this, categoryService, authService);
+    }
+
+    public MainController createMainController() {
+        return new MainController(this, authService, expenseService, categoryService);
     }
 
 

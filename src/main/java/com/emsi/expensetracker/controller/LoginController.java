@@ -51,7 +51,7 @@ public class LoginController {
     }
 
     private void loadMainView() {
-        MainController controller = new MainController(app , authService);
+        MainController controller = app.createMainController();
         Scene scene = app.loadScene("/fxml/MainView.fxml", controller);
         Stage stage = (Stage) usernameField.getScene().getWindow();
         stage.setScene(scene);
