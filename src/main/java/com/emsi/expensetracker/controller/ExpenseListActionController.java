@@ -38,7 +38,7 @@ public class ExpenseListActionController {
     @FXML
     private TableColumn<Expense, Double> amountColumn;
     @FXML
-    private TableColumn<Expense, Integer> categoryColumn;
+    private TableColumn<Expense, String> categoryColumn;
     @FXML
     private TableColumn<Expense, LocalDate> dateColumn;
     @FXML
@@ -56,7 +56,13 @@ public class ExpenseListActionController {
         // Set up column bindings
         expenseColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
         amountColumn.setCellValueFactory(new PropertyValueFactory<>("amount"));
-        categoryColumn.setCellValueFactory(new PropertyValueFactory<>("categoryId"));
+        categoryColumn.setCellValueFactory(cellData -> {
+            Expense expense = cellData.getValue();
+            Category category = categoryService.getCategoryById(expense.getCategoryId());
+            String categoryName = category != null ? category.getName() : "Unknown";
+            return new javafx.beans.property.SimpleStringProperty(categoryName);
+        });
+
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
 
         // Set up action buttons column
